@@ -1,0 +1,17 @@
+__pycache__/
+.env
+.DS_Store
+.vscode/
+node_modules/
+*.log
+dist/
+build/
+*.pyc
+__pypackages__/
+
+mv app mcp_chatbot/
+mv pyproject.toml mcp_chatbot/
+mv Dockerfile mcp_chatbot/
+mv requirements.txt mcp_chatbot/
+mv .gitignore mcp_chatbot/
+mv .env* mcp_chatbot/ 2>/dev/null

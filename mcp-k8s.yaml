@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-chatbot
+  labels:
+    app: mcp-chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-chatbot
+  template:
+    metadata:
+      labels:
+        app: mcp-chatbot
+    spec:
+      containers:
+        - name: streamlit-container
+          image: mcp-chatbot:latest
+          ports:
+            - containerPort: 8501
+          envFrom:
+            - secretRef:
+                name: mcp-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: mcp-chatbot
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
